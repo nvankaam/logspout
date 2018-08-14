@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:  
+  logspout:
+    build:
+      context: container/
+     volumes:
+      - '/var/run/docker.sock:/tmp/docker.sock'
+    environment:
+      ROUTE_URIS: logstash://localhost:5000
+      LOGSTASH_TAGS: docker-elk
+    links:
+      - logstash
+   
+    restart: on-failure
